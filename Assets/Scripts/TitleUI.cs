@@ -9,10 +9,11 @@ public class TitleUI : MonoBehaviour
     private List<GameObject> title_ui;
 
     private bool isExit = false;
+    private bool isCredit = false;
 
     private void Awake()
     {
-        if(title_ui[0].name == "ExitLayer") title_ui[0].SetActive(false);
+        foreach(GameObject ui_object in title_ui) ui_object.SetActive(false);
     }
 
     void Start()
@@ -23,11 +24,16 @@ public class TitleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) OpenExitMenu();
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isCredit) OpenCreditMenu();
+            else OpenExitMenu();
+        }
     }
 
     public void OpenExitMenu()
     {
+        // title_ui[0] = ExitLayer
         if(isExit)
         {
             title_ui[0].SetActive(false);
@@ -37,6 +43,21 @@ public class TitleUI : MonoBehaviour
         {
             title_ui[0].SetActive(true);
             isExit = true;
+        }
+    }
+
+    public void OpenCreditMenu()
+    {
+        // title_ui[1] = CreditLayer
+        if(isCredit)
+        {
+            title_ui[1].SetActive(false);
+            isCredit = false;
+        }
+        else
+        {
+            title_ui[1].SetActive(true);
+            isCredit = true;
         }
     }
 }
