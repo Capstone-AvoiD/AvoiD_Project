@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -14,5 +14,15 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+    
+    public void GameExit()
+    {
+        // 전처리기 지시문 이용
+        #if UNITY_EDITOR_WIN
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
