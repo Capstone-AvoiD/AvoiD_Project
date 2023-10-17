@@ -15,6 +15,7 @@ public class MiniGamePlayer : MonoBehaviour
         player_direction = transform.position;
     }
 
+
     // Update is called once per frame
     void Update()
     {

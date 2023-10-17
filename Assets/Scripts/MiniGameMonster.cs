@@ -1,39 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MiniGameMonster : MonoBehaviour
 {
     [SerializeField]
     private GameObject player;
-    private Transform player_transform;
-    private float monster_speed = 2.0f;
+    private Rigidbody2D player_rigid;
     private Rigidbody2D monster_rigid;
 
-    [SerializeField]
-    private NavMeshAgent agent;
+    private float monster_speed = 1.5f;
+
+    private SpriteRenderer monster_sprite;
 
     private void Awake()
     {
-        player_transform = player.GetComponent<Transform>();
-        agent = gameObject.GetComponent<NavMeshAgent>();
+        player_rigid = player.GetComponent<Rigidbody2D>();
         monster_rigid = gameObject.GetComponent<Rigidbody2D>();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+        monster_sprite = gameObject.GetComponent<SpriteRenderer>();
+
+        InvokeRepeating("FlipImage", 0.0f, 0.2f);
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         Move();
     }
 
     private void Move()
     {
-        agent.speed = monster_speed * Time.deltaTime;
-        agent.destination = player_transform.transform.position;
+        Vector2 player_pos = player.transform.position - transform.position;
+
+        monster_rigid.MovePosition(monster_rigid.position + player_pos.normalized * monster_speed * Time.deltaTime);
+    }
+
+    private void FlipImage()
+    {
+        if(gameObject.transform.position.x < player.transform.position.x) monster_sprite.flipX = false;
+        else if(gameObject.transform.position.x > player.transform.position.x) monster_sprite.flipX = true;
     }
 }
