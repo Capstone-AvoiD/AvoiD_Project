@@ -16,12 +16,6 @@ public class TitleUI : MonoBehaviour
         foreach(GameObject ui_object in title_ui) ui_object.SetActive(false);
     }
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -59,5 +53,10 @@ public class TitleUI : MonoBehaviour
             title_ui[1].SetActive(true);
             isCredit = true;
         }
+    }
+
+    public void OpenGamePlayMenu()
+    {
+        
     }
 }

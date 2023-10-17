@@ -7,7 +7,6 @@ public class MiniGameMonster : MonoBehaviour
 {
     [SerializeField]
     private GameObject player;
-    private Rigidbody2D player_rigid;
     private Rigidbody2D monster_rigid;
 
     private float monster_speed = 1.5f;
@@ -16,7 +15,6 @@ public class MiniGameMonster : MonoBehaviour
 
     private void Awake()
     {
-        player_rigid = player.GetComponent<Rigidbody2D>();
         monster_rigid = gameObject.GetComponent<Rigidbody2D>();
         monster_sprite = gameObject.GetComponent<SpriteRenderer>();
 
