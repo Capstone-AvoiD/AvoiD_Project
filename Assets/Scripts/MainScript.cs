@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
-    private Text NPCText;
+    private Text NPCText ;
 
     // Start is called before the first frame update
     void Start()
@@ -19,9 +19,9 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     public void NPCChatEnter(string text)   //Panel 활성
     {
         NPCText.text = text;
-        NPCDialog.SetActive(true);
+        NPCDialog.SetActive(true);        
     }
-
+     
     public void NPCChatExit()   //Panel 비활성
     {
         NPCText.text = "";
