@@ -42,16 +42,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
-    public void MiniGameScene()
-    {
-        SceneManager.LoadScene("MiniGameScene");
-    }
-
-    public void PlatformerScene()
-    {
-        SceneManager.LoadScene("Platformer_Scene");
-    }
     
     public void GameExit()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TitleUI : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class TitleUI : MonoBehaviour
             if(menu_state == MenuState.credit) OpenCreditMenu();
             else if(menu_state == MenuState.gameplay) OpenGamePlayMenu();
             else OpenExitMenu();
+
         }
     }
 
@@ -80,5 +82,15 @@ public class TitleUI : MonoBehaviour
             isGame = true;
             menu_state = MenuState.gameplay;
         }
+    }
+
+    public void MiniGameScene()
+    {
+        SceneManager.LoadScene("MiniGameScene");
+    }
+
+    public void PlatformerScene()
+    {
+        SceneManager.LoadScene("Platformer_Scene");
     }
 }

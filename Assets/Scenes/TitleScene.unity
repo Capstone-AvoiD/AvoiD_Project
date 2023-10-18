@@ -651,8 +651,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 641598482}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1055449664}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
         m_MethodName: MiniGameScene
         m_Mode: 1
         m_Arguments:
@@ -3210,8 +3210,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 641598482}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1055449664}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
         m_MethodName: PlatformerScene
         m_Mode: 1
         m_Arguments:
