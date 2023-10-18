@@ -10,7 +10,7 @@ public class TitleUI : MonoBehaviour
     [SerializeField]
     private List<GameObject> title_ui;
 
-    enum MenuState{idle, exit, credit, gameplay};
+    enum MenuState{idle, exit, credit, gameplay};                               // UI 열려 있는 상태 조절하기 위한 enum 객체
 
     private bool isExit = false;
     private bool isCredit = false;
@@ -19,12 +19,12 @@ public class TitleUI : MonoBehaviour
 
     private void Awake()
     {
-        foreach(GameObject ui_object in title_ui) ui_object.SetActive(false);
+        foreach(GameObject ui_object in title_ui) ui_object.SetActive(false);   // 초기 불필요한 화면 비활성화
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape))                                // esc키를 이용해서 UI 화면 비활성화
         {
             if(menu_state == MenuState.credit) OpenCreditMenu();
             else if(menu_state == MenuState.gameplay) OpenGamePlayMenu();
@@ -33,7 +33,7 @@ public class TitleUI : MonoBehaviour
         }
     }
 
-    public void OpenExitMenu()
+    public void OpenExitMenu()                                            // 나가기 UI 활성 및 비활성화
     {
         // title_ui[0] = ExitLayer
         if(isExit)
@@ -50,7 +50,7 @@ public class TitleUI : MonoBehaviour
         }
     }
 
-    public void OpenCreditMenu()
+    public void OpenCreditMenu()                                        // Credit UI 활성 및 비활성화
     {
         // title_ui[1] = CreditLayer
         if(isCredit)
@@ -67,7 +67,7 @@ public class TitleUI : MonoBehaviour
         }
     }
 
-    public void OpenGamePlayMenu()
+    public void OpenGamePlayMenu()                      // 게임 선택 UI 활성 및 비활성화
     {
         // title_ui[2] = GamePlayLayer
         if(isGame)
@@ -84,12 +84,12 @@ public class TitleUI : MonoBehaviour
         }
     }
 
-    public void MiniGameScene()
+    public void MiniGameScene()                        // 게임 선택 시 미니 게임 씬 전환
     {
         SceneManager.LoadScene("MiniGameScene");
     }
 
-    public void PlatformerScene()
+    public void PlatformerScene()                      // 게임 선택 시 플랫포머 씬 전환
     {
         SceneManager.LoadScene("Platformer_Scene");
     }

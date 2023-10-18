@@ -5,10 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Singleton object setting.
     private static GameManager _instance;
 
-    // 외부에서 GameManager 클래스를 instance로 참조 가능
+    // 외부에서 GameManager 클래스를 instance로 참조 가능 - Singleton Pattern
     public static GameManager instance
     {
         get
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance == null)
+        if(_instance == null)                                                   // GameManager가 존재하지 않을 경우 이 오브젝트를 GameManager로 설정
         {
             _instance = this;
             DontDestroyOnLoad(gameObject);
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape))                                    // 임시용 씬 전환 기능 - esc키를 통해 씬 전환
         {
             if(SceneManager.GetActiveScene().name == "MiniGameScene")
             {
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void GameExit()
+    public void GameExit()                                                      // 게임 종료 기능
     {
         // 전처리기 지시문 이용
         #if UNITY_EDITOR_WIN
