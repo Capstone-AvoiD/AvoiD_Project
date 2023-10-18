@@ -8,7 +8,6 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
     private TextMeshProUGUI NPCText ;
-    private GameObject TextTrigger;
 
     // Start is called before the first frame update
     void Start()
