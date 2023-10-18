@@ -41,14 +41,4 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    
-    public void GameExit()                                                      // 게임 종료 기능
-    {
-        // 전처리기 지시문 이용
-        #if UNITY_EDITOR_WIN
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
-    }
 }
