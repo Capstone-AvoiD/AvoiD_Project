@@ -8,13 +8,14 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
     private TextMeshProUGUI NPCText ;
+    private GameObject TextTrigger;
 
     // Start is called before the first frame update
     void Start()
     {
         NPCDialog = GameObject.Find("NPCDialog");
         NPCText = GameObject.Find("NPCText").GetComponent<TextMeshProUGUI>();
-        NPCDialog.SetActive(false);
+        NPCDialog.SetActive(false); //Panel 비활성
     }
 
     public void NPCChatEnter(string text)   //Panel 활성
