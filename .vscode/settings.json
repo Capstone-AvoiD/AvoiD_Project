@@ -51,5 +51,10 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "AvoiD_Project.sln"
+    "dotnet.defaultSolution": "Unity.sln",
+    "cSpell.words": [
+        "Dont",
+        "gameplay",
+        "Platformer"
+    ]
 }

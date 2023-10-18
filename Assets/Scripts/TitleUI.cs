@@ -13,7 +13,8 @@ public class TitleUI : MonoBehaviour
 
     private bool isExit = false;
     private bool isCredit = false;
-    private MenuState menu_state = MenuState.idle;
+    private bool isGame = false;
+    private MenuState menu_state;
 
     private void Awake()
     {
@@ -66,6 +67,18 @@ public class TitleUI : MonoBehaviour
 
     public void OpenGamePlayMenu()
     {
-        
+        // title_ui[2] = GamePlayLayer
+        if(isGame)
+        {
+            title_ui[2].SetActive(false);
+            isGame = false;
+            menu_state = MenuState.idle;
+        }
+        else
+        {
+            title_ui[2].SetActive(true);
+            isGame = true;
+            menu_state = MenuState.gameplay;
+        }
     }
 }

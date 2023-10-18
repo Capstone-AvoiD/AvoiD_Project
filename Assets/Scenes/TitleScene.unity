@@ -560,7 +560,7 @@ RectTransform:
   - {fileID: 1274744646}
   - {fileID: 276976285}
   m_Father: {fileID: 1055449663}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -650,7 +650,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 144910007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641598482}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: MiniGameScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &144910007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2384,7 +2396,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1028484504}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1055449664}
+        m_TargetAssemblyTypeName: TitleUI, Assembly-CSharp
+        m_MethodName: OpenGamePlayMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1028484504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,9 +2543,9 @@ RectTransform:
   - {fileID: 339905922}
   - {fileID: 798340870}
   - {fileID: 1484926244}
-  - {fileID: 99742062}
   - {fileID: 1633517636}
   - {fileID: 1764312215}
+  - {fileID: 99742062}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2545,6 +2569,7 @@ MonoBehaviour:
   title_ui:
   - {fileID: 99742061}
   - {fileID: 1633517635}
+  - {fileID: 1764312214}
 --- !u!1 &1098366908
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,7 +3209,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1277404347}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 641598482}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlatformerScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1277404347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3907,7 +3944,7 @@ RectTransform:
   - {fileID: 1549676142}
   - {fileID: 1468511344}
   m_Father: {fileID: 1055449663}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4157,7 +4194,7 @@ RectTransform:
   - {fileID: 1632780033}
   - {fileID: 2117119973}
   m_Father: {fileID: 1055449663}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
