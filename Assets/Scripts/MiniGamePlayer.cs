@@ -43,11 +43,12 @@ public class MiniGamePlayer : MonoBehaviour
         player_rigid.MovePosition(player_rigid.position + player_direction * player_speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider2D)
+    private void OnCollisionEnter2D(Collision2D collision2D)
     {
-        if(collider2D.gameObject.CompareTag("Monster"))
+        if(collision2D.gameObject.CompareTag("Monster"))
         {
             isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
+            Debug.Log(isFailure);
         }
     }
 }

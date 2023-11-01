@@ -25,16 +25,14 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))                                    // 임시용 씬 전환 기능 - esc키를 통해 씬 전환
         {
-            // if(SceneManager.GetActiveScene().name == "MiniGameScene")
-            // {
-            //     SceneManager.LoadScene("TitleScene");
-            // }
             if(SceneManager.GetActiveScene().name == "Platformer_Scene")
             {
                 SceneManager.LoadScene("TitleScene");

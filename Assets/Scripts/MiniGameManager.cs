@@ -11,17 +11,20 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField]
     private GameObject retryMenu;
 
+    private bool isState = false;
+
     private bool isGameOver
     {
         get
         {
-            return false;
+            isGameOver = isState;
+            return isGameOver;
         }
         set
         {
-            isGameOver = value;
+            isState = value;
 
-            if(isGameOver)
+            if(isState)
             {
                 ShowGameMenu();
             }

@@ -8,6 +8,8 @@ public class MiniGameInstantiation : MonoBehaviour
 
     [SerializeField]
     private GameObject monsterPrefab;
+    [SerializeField]
+    private GameObject monsterLayer;
 
     private List<GameObject> monsterList = new();
 
@@ -22,6 +24,7 @@ public class MiniGameInstantiation : MonoBehaviour
         Vector3 spawnPoint = randomBool ? RandomHorizontalPos() : RandomVerticalPos();
 
         GameObject instance = Instantiate(monsterPrefab, spawnPoint, Quaternion.identity);
+        instance.transform.parent = monsterLayer.transform;
         
         monsterList.Add(instance);
 
