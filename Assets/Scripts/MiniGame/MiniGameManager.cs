@@ -9,16 +9,18 @@ public class MiniGameManager : MonoBehaviour
     private MiniGamePlayer miniGamePlayer;
     
     [SerializeField]
+    private GameObject pauseMenu;
+    [SerializeField]
     private GameObject retryMenu;
 
     private bool isState = false;
+    private bool isPause = false;
 
     private bool isGameOver
     {
         get
         {
-            isGameOver = isState;
-            return isGameOver;
+            return isState;
         }
         set
         {
@@ -26,7 +28,7 @@ public class MiniGameManager : MonoBehaviour
 
             if(isState)
             {
-                ShowGameMenu();
+                ShowGameOverMenu();
             }
         }
     }
@@ -42,9 +44,21 @@ public class MiniGameManager : MonoBehaviour
         {
             SetGameOver();
         }
+
+        if(!isGameOver && Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowPauseMenu();
+        }
     }
 
-    private void ShowGameMenu()
+    private void ShowPauseMenu()
+    {
+        isPause = !isPause;
+        pauseMenu.SetActive(isPause);
+        Time.timeScale = isPause ? 0.0f : 1.0f;
+    }
+
+    private void ShowGameOverMenu()
     {
         retryMenu.SetActive(true);
         if(Input.GetKeyDown(KeyCode.R))
@@ -61,5 +75,20 @@ public class MiniGameManager : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         isGameOver = true;
+    }
+
+    public void ClickReturnBtn()
+    {
+        ShowPauseMenu();
+    }
+
+    public void ClickSettingBtn()
+    {
+        Debug.Log("Setting Button is clicked");
+    }
+
+    public void ClickTitleBtn()
+    {
+        SceneManager.LoadScene("TitleScene");
     }
 }

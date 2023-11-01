@@ -10,13 +10,13 @@ public class MiniGameMonster : MonoBehaviour
 
     private float monster_speed = 1.8f;
 
-    private SpriteRenderer monster_sprite;
+    private SpriteRenderer monsterSprite;
 
     private void Awake()
     {
         player = GameObject.FindWithTag("Player");
         monster_rigid = gameObject.GetComponent<Rigidbody2D>();
-        monster_sprite = gameObject.GetComponent<SpriteRenderer>();
+        monsterSprite = gameObject.GetComponent<SpriteRenderer>();
 
         InvokeRepeating("FlipImage", 0.0f, 0.2f);                       // 반복적인 이미지 반전을 막기 위해 딜레이 조절
     }
@@ -35,7 +35,7 @@ public class MiniGameMonster : MonoBehaviour
 
     private void FlipImage()                                        // 플레이어와 몬스터 위치 기준으로 반전되게 설정
     {
-        if(gameObject.transform.position.x < player.transform.position.x) monster_sprite.flipX = false;
-        else if(gameObject.transform.position.x > player.transform.position.x) monster_sprite.flipX = true;
+        if(gameObject.transform.position.x < player.transform.position.x) monsterSprite.flipX = false;
+        else if(gameObject.transform.position.x > player.transform.position.x) monsterSprite.flipX = true;
     }
 }

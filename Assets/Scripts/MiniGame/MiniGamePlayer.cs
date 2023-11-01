@@ -9,13 +9,24 @@ public class MiniGamePlayer : MonoBehaviour
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
 
+    private Vector2 prePos;
+
     [HideInInspector]
     public bool isFailure = false;
+
+    private SpriteRenderer playerSprite;
+
+    [Tooltip("Right, Back, Left, Front Sprites")]
+    [SerializeField]
+    private List<Sprite> spriteList = new();
 
     private void Awake()
     {
         player_rigid = gameObject.GetComponent<Rigidbody2D>();
         player_direction = transform.position;
+        playerSprite = gameObject.GetComponent<SpriteRenderer>();
+
+        prePos = transform.localPosition;
     }
 
     void Update()                                               // 방향 입력은 프레임으로 받도록 유도
@@ -26,6 +37,7 @@ public class MiniGamePlayer : MonoBehaviour
     private void FixedUpdate()                                  // 물리적인 움직임은 고정적인 프레임으로 이동하도록 유도
     {
         MovePlayer();
+        ChangeSprite();
     }
 
     private Vector2 Input_Direction()                           // Axis에 따라 상하좌우를 이동할 수 있도록 방향을 결정 받음
@@ -43,12 +55,23 @@ public class MiniGamePlayer : MonoBehaviour
         player_rigid.MovePosition(player_rigid.position + player_direction * player_speed * Time.deltaTime);
     }
 
+    private void ChangeSprite()
+    {
+
+        if(prePos.x > transform.localPosition.x) playerSprite.sprite = spriteList[2];
+        else if(prePos.x < transform.localPosition.x) playerSprite.sprite = spriteList[0];
+
+        if(prePos.y > transform.localPosition.y) playerSprite.sprite = spriteList[3];
+        else if(prePos.y < transform.localPosition.y) playerSprite.sprite = spriteList[1];
+
+        prePos = transform.localPosition;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
         if(collision2D.gameObject.CompareTag("Monster"))
         {
             isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
-            Debug.Log(isFailure);
         }
     }
 }
