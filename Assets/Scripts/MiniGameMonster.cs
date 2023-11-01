@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class MiniGameMonster : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player;                      // 플레이어 오브젝트 설정
     private Rigidbody2D monster_rigid;              // 몬스터가 갖게 될 속성 생성
 
-    private float monster_speed = 1.5f;
+    private float monster_speed = 1.8f;
 
     private SpriteRenderer monster_sprite;
 
     private void Awake()
     {
+        player = GameObject.FindWithTag("Player");
         monster_rigid = gameObject.GetComponent<Rigidbody2D>();
         monster_sprite = gameObject.GetComponent<SpriteRenderer>();
 

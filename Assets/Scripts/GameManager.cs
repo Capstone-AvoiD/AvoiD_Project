@@ -31,11 +31,11 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))                                    // 임시용 씬 전환 기능 - esc키를 통해 씬 전환
         {
-            if(SceneManager.GetActiveScene().name == "MiniGameScene")
-            {
-                SceneManager.LoadScene("TitleScene");
-            }
-            else if(SceneManager.GetActiveScene().name == "Platformer_Scene")
+            // if(SceneManager.GetActiveScene().name == "MiniGameScene")
+            // {
+            //     SceneManager.LoadScene("TitleScene");
+            // }
+            if(SceneManager.GetActiveScene().name == "Platformer_Scene")
             {
                 SceneManager.LoadScene("TitleScene");
             }

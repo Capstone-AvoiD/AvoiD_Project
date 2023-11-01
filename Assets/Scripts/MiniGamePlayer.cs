@@ -9,14 +9,15 @@ public class MiniGamePlayer : MonoBehaviour
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
 
+    [HideInInspector]
+    public bool isFailure = false;
+
     private void Awake()
     {
         player_rigid = gameObject.GetComponent<Rigidbody2D>();
         player_direction = transform.position;
     }
 
-
-    // Update is called once per frame
     void Update()                                               // 방향 입력은 프레임으로 받도록 유도
     {
         Input_Direction();
@@ -24,7 +25,7 @@ public class MiniGamePlayer : MonoBehaviour
 
     private void FixedUpdate()                                  // 물리적인 움직임은 고정적인 프레임으로 이동하도록 유도
     {
-        Move();
+        MovePlayer();
     }
 
     private Vector2 Input_Direction()                           // Axis에 따라 상하좌우를 이동할 수 있도록 방향을 결정 받음
@@ -37,9 +38,16 @@ public class MiniGamePlayer : MonoBehaviour
         return player_direction;
     }
 
-    private void Move()                                         // MovePosition으로 오브젝트를 고정적으로 이동하게 설정
+    private void MovePlayer()                                         // MovePosition으로 오브젝트를 고정적으로 이동하게 설정
     {
         player_rigid.MovePosition(player_rigid.position + player_direction * player_speed * Time.deltaTime);
-        // transform.Translate(player_direction * Time.deltaTime * player_speed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if(collider2D.gameObject.CompareTag("Monster"))
+        {
+            isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
+        }
     }
 }
