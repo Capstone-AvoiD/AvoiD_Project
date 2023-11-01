@@ -8,6 +8,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
     private TextMeshProUGUI NPCText ;
+    string m_text = "안녕 반가워! 밥은 잘 먹었어?";
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,8 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     public void NPCChatEnter(string text)   //Panel 활성
     {
         NPCText.text = text;
-        NPCDialog.SetActive(true);        
+        NPCDialog.SetActive(true);
+        StartCoroutine(TypingText());   //텍스트 타이핑 효과 코루틴 시작
     }
      
     public void NPCChatExit()   //Panel 비활성
@@ -28,6 +30,17 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         NPCText.text = "";
         NPCDialog.SetActive(false);
     }    
+
+    IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
+    {
+        yield return new WaitForSeconds(0.5f);  //타이핑 시작 대기
+        for (int i = 0; i <= m_text.Length; i++)
+        {
+            NPCText.text = m_text.Substring(0, i);
+
+            yield return new WaitForSeconds(0.15f); //타이핑 간격
+        }
+    }
     // Update is called once per frame
     void Update()
     {
