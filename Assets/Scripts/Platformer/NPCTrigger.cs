@@ -35,6 +35,7 @@ public class NPCTrigger : MonoBehaviour
         if(collision.gameObject.name == "player")
         {
             Main.GetComponent<MainScript>().NPCChatExit();
+            TextTrigger.SetActive(false);
         }
     }
     // Update is called once per frame
