@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb6fb40de07689488505cf3f9effbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Panel: {fileID: 76420146}
+  FadePanel: {fileID: 0}
 --- !u!1 &423874304
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +997,7 @@ GameObject:
   - component: {fileID: 1234335761}
   - component: {fileID: 1234335760}
   - component: {fileID: 1234335763}
+  - component: {fileID: 1234335764}
   m_Layer: 0
   m_Name: GoalPanel
   m_TagString: Untagged
@@ -1110,6 +1111,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ce708223a881c4ba19e6e1d8e03a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1234335764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234335759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb6fb40de07689488505cf3f9effbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadePanel: {fileID: 76420146}
 --- !u!1 &1240787256
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Text;
 
 public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
     private TextMeshProUGUI NPCText ;
     string m_text = "안녕 반가워! 밥은 잘 먹었어?";
+    StringBuilder strb = new StringBuilder();
 
     // Start is called before the first frame update
     void Start()
@@ -24,11 +26,14 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         NPCDialog.SetActive(true);
         StartCoroutine(TypingText());   //텍스트 타이핑 효과 코루틴 시작
     }
-     
+    
     public void NPCChatExit()   //Panel 비활성
     {
+        StopAllCoroutines();    //코루틴 종료
+        //StopCoroutine(TypingText());
         NPCText.text = "";
         NPCDialog.SetActive(false);
+        
     }    
 
     IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
