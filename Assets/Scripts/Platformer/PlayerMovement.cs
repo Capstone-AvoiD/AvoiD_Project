@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         
         //걷기 애니메이션
-        if (Mathf.Abs(rigid.velocity.x) < 0.3)
+        if (rigid.velocity.normalized.x == 0)
             anim.SetBool("isWalkingRight", false);
         else
             anim.SetBool("isWalkingRight", true);

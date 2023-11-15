@@ -13,6 +13,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     StringBuilder strb = new StringBuilder();
 
     // Start is called before the first frame update
+        
     void Start()
     {
         NPCDialog = GameObject.Find("NPCDialog");
@@ -29,8 +30,9 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     
     public void NPCChatExit()   //Panel 비활성
     {
+        
         StopAllCoroutines();    //코루틴 종료
-        //StopCoroutine(TypingText());
+        StopCoroutine(TypingText());
         NPCText.text = "";
         NPCDialog.SetActive(false);
         
