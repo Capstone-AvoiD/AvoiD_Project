@@ -30,9 +30,9 @@ public class PlayerMove : MonoBehaviour
 
         //Animator
         if (Mathf.Abs(rigid.velocity.x) < 0.5)
-            anim.SetBool("isWalking", false);
+            anim.SetBool("isWalking_Horizontal", false);
         else
-            anim.SetBool("isWalking", true);
+            anim.SetBool("isWalking_Horizontal", true);
     }
 
     private void FixedUpdate()

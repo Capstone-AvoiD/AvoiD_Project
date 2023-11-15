@@ -9,6 +9,8 @@ public class MiniGamePlayer : MonoBehaviour
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
 
+    Animator anim;//*****************************
+
     private Vector2 prePos;
 
     [HideInInspector]
@@ -22,9 +24,11 @@ public class MiniGamePlayer : MonoBehaviour
 
     private void Awake()
     {
-        player_rigid = gameObject.GetComponent<Rigidbody2D>();
+        player_rigid = gameObject.GetComponent<Rigidbody2D>(); 
         player_direction = transform.position;
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
+        
+        anim = GetComponent<Animator>();
 
         prePos = transform.localPosition;
     }
@@ -32,6 +36,14 @@ public class MiniGamePlayer : MonoBehaviour
     void Update()                                               // 방향 입력은 프레임으로 받도록 유도
     {
         Input_Direction();
+
+        if (Input.GetButton("Horizontal"))  //*****************************
+            playerSprite.flipX = Input.GetAxisRaw("Horizontal") == -1;
+
+        if (Mathf.Abs(player_rigid.velocity.x) < 0.5)   //*****************************
+            anim.SetBool("isWalking_Horizontal", false);
+        else
+            anim.SetBool("isWalking_Horizontal", true);
     }
 
     private void FixedUpdate()                                  // 물리적인 움직임은 고정적인 프레임으로 이동하도록 유도
@@ -73,5 +85,19 @@ public class MiniGamePlayer : MonoBehaviour
         {
             isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
         }
+    }
+
+    private void MiniGame_Animator()    //*****************************
+    {
+        
+
+        //if (Mathf.Abs(player_rigid.velocity.x) < 0.5)
+        //anim.SetBool("isWalking_Horizontal", false);
+        //else
+        //anim.SetBool("isWalking_Horizontal", true);
+
+        //anim.SetBool("isWalking_Horizontal", false);
+        //anim.SetBool("isWalking_Up", false);
+        //anim.SetBool("isWalking_Down", false);
     }
 }
