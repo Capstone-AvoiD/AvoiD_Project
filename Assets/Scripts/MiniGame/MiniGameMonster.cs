@@ -38,4 +38,16 @@ public class MiniGameMonster : MonoBehaviour
         if(gameObject.transform.position.x < player.transform.position.x) monsterSprite.flipX = false;
         else if(gameObject.transform.position.x > player.transform.position.x) monsterSprite.flipX = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D collider2D) 
+    {
+        switch(collider2D.gameObject.tag)
+        {
+            case "Weapon":
+                Destroy(gameObject);
+                break;
+            default:
+                break;
+        }
+    }
 }
