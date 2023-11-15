@@ -36,14 +36,10 @@ public class MiniGamePlayer : MonoBehaviour
     void Update()                                               // 방향 입력은 프레임으로 받도록 유도
     {
         Input_Direction();
+        Debug.Log(player_rigid.velocity.x);
 
-        if (Input.GetButton("Horizontal"))  //*****************************
-            playerSprite.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        if (Mathf.Abs(player_rigid.velocity.x) < 0.5)   //*****************************
-            anim.SetBool("isWalking_Horizontal", false);
-        else
-            anim.SetBool("isWalking_Horizontal", true);
+
     }
 
     private void FixedUpdate()                                  // 물리적인 움직임은 고정적인 프레임으로 이동하도록 유도
