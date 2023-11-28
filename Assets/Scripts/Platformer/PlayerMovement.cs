@@ -24,13 +24,13 @@ public class PlayerMovement : MonoBehaviour
         float distance_per_frame = speed * Time.deltaTime;
         float horizontal_input = Input.GetAxis("Horizontal");
 
-        transform.Translate(Vector3.right * horizontal_input * distance_per_frame); //ÁÂ,¿ì ¹æÇâÅ°·Î ÀÌµ¿
+        transform.Translate(Vector3.right * horizontal_input * distance_per_frame); //ï¿½ï¿½,ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Ìµï¿½
 
-        //¹æÇâ ÀüÈ¯
+        //ìŠ¤í”„ë¼ì´íŠ¸ flip
         if(Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         
-        //°È±â ¾Ö´Ï¸ŞÀÌ¼Ç
+        //ê±·ê¸° ì• ë‹ˆë©”ì´ì…˜
         if (rigid.velocity.normalized.x == 0)
             anim.SetBool("isWalkingRight", false);
         else

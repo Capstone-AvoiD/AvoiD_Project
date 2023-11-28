@@ -21,19 +21,19 @@ public class CameraFollow : MonoBehaviour
         width = height * Screen.width / Screen.height;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() //ì¹´ë©”ë¼ ì œí•œë²”ìœ„ ê·¸ë¦¬ê¸°
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(center,size);
+        Gizmos.DrawWireCube(center,size);   
     }
-
-    // Update is called once per frame
     void LateUpdate()
     {
-        //transform.position = new Vector3(target.position.x, target.position.y + 3, -10f);   //ÇÃ·¹ÀÌ¾î À§Ä¡ ÃßÀû
-        transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed); //ºÎµå·´°Ô ÃßÀû
-        //transform.position = new Vector3(transform.position.x, transform.position.y, -10.0f);   //Z°ª Á¦ÇÑ
+        //transform.position = new Vector3(target.position.x, target.position.y + 3, -10f);   //ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        //transform.position = new Vector3(transform.position.x, transform.position.y, -10.0f);   //Zï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
+        transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * speed); //ë¶€ë“œëŸ½ê²Œ ì¶”ì 
+
+        //ì¹´ë©”ë¼ ìœ„ì¹˜
         float Ix = size.x * 0.5f - width;
         float clampX = Mathf.Clamp(transform.position.x, -Ix + center.x, Ix + center.x);
 

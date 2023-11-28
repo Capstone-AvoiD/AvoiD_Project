@@ -24,11 +24,11 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
         }
 
-        //Direction Sprite
+        //방향에 따라 이미지 전환
         if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
-        //Animator
+        //걷는 애니메이션
         if (Mathf.Abs(rigid.velocity.x) < 0.5)
             anim.SetBool("isWalking_Horizontal", false);
         else

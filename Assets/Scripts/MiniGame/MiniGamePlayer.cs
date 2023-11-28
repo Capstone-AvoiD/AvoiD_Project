@@ -5,14 +5,11 @@ using UnityEngine;
 public class MiniGamePlayer : MonoBehaviour
 {
 
-    [Tooltip("Right, Back, Left, Front Sprites")]
-    [SerializeField] private List<Sprite> spriteList = new();
-    [SerializeField] private GameObject pencilPrefab;
-
     private float player_speed = 3.0f;                          // 플레이어 속성 생성
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
-    private float attackTime = 1.5f;
+
+    Animator anim;//*****************************
 
     private Vector2 prePos;
 
@@ -21,20 +18,28 @@ public class MiniGamePlayer : MonoBehaviour
 
     private SpriteRenderer playerSprite;
 
+    [Tooltip("Right, Back, Left, Front Sprites")]
+    [SerializeField]
+    private List<Sprite> spriteList = new();
+
     private void Awake()
     {
-        player_rigid = gameObject.GetComponent<Rigidbody2D>();
+        player_rigid = gameObject.GetComponent<Rigidbody2D>(); 
         player_direction = transform.position;
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
+        
+        anim = GetComponent<Animator>();
 
         prePos = transform.localPosition;
-
-        StartCoroutine(Attack());
     }
 
     void Update()                                               // 방향 입력은 프레임으로 받도록 유도
     {
         Input_Direction();
+        Debug.Log(player_rigid.velocity.x);
+
+
+
     }
 
     private void FixedUpdate()                                  // 물리적인 움직임은 고정적인 프레임으로 이동하도록 유도
@@ -58,16 +63,6 @@ public class MiniGamePlayer : MonoBehaviour
         player_rigid.MovePosition(player_rigid.position + player_direction * player_speed * Time.deltaTime);
     }
 
-    private IEnumerator Attack()
-    {
-        while(true)
-        {
-            Instantiate(pencilPrefab, transform.localPosition, new Quaternion());
-
-            yield return new WaitForSeconds(attackTime);
-        }
-    }
-
     private void ChangeSprite()
     {
 
@@ -84,7 +79,21 @@ public class MiniGamePlayer : MonoBehaviour
     {
         if(collision2D.gameObject.CompareTag("Monster"))
         {
-            isFailure = true;            
+            isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
         }
+    }
+
+    private void MiniGame_Animator()    //*****************************
+    {
+        
+
+        //if (Mathf.Abs(player_rigid.velocity.x) < 0.5)
+        //anim.SetBool("isWalking_Horizontal", false);
+        //else
+        //anim.SetBool("isWalking_Horizontal", true);
+
+        //anim.SetBool("isWalking_Horizontal", false);
+        //anim.SetBool("isWalking_Up", false);
+        //anim.SetBool("isWalking_Down", false);
     }
 }

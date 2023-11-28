@@ -28,7 +28,7 @@ public class SceneTransition : MonoBehaviour
         }
     }
 
-    private void Fading()
+    private void Fading()   //Fade
     {
         Panel.GetComponent<FadeScript>().Fade();
         Invoke("LoadMiniGameScene", 1.0f);

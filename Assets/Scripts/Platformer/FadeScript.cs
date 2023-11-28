@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class FadeScript : MonoBehaviour
 {
     public Image FadePanel;
-    float time = 0.0f;  //Áö¼Ó½Ã°£
-    float F_time = 1.0f;    //ÃÑ Áö¼Ó½Ã°£
-
+    float time = 0.0f;  //ï¿½ï¿½ï¿½Ó½Ã°ï¿½
+    float F_time = 1.0f;    //ï¿½ï¿½ ï¿½ï¿½ï¿½Ó½Ã°ï¿½
     float f = 1.0f;
     float F
     {
@@ -16,39 +15,38 @@ public class FadeScript : MonoBehaviour
         set
         {
             f = value;
-
-            // Sene ¾À·Îµå 
+            // Sene ï¿½ï¿½ï¿½Îµï¿½ 
         }
     }
 
     public void Fade()
     {
-        StartCoroutine(FadeFlow()); //ÄÚ·çÆ¾ ½ÃÀÛ
+        StartCoroutine(FadeFlow()); //ï¿½Ú·ï¿½Æ¾ ï¿½ï¿½ï¿½ï¿½
     }
     IEnumerator FadeFlow()
     {
-        FadePanel.gameObject.SetActive(true);   //ÀÌ¹ÌÁö È°¼ºÈ­
+        FadePanel.gameObject.SetActive(true);   //ï¿½Ì¹ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         time = 0;
-        Color alpha = FadePanel.color;  //Color º¯¼ö
+        Color alpha = FadePanel.color;  //Color alphaï¿½ï¿½ï¿½ï¿½
         
         while(alpha.a < 1.0f)   //Fade Out
         {
             time += Time.deltaTime / F_time;
-            alpha.a = Mathf.Lerp(0, 1, time);   //ºÎµå·´°Ô ÀüÈ¯
-            FadePanel.color = alpha;    //¸Å ÇÁ·¹ÀÓ ÀÌ¹ÌÁö¿¡ alpha ´ëÀÔ
+            alpha.a = Mathf.Lerp(0, 1, time);   //ï¿½Îµå·´ï¿½ï¿½ ï¿½ï¿½È¯
+            FadePanel.color = alpha;    //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ alpha ï¿½ï¿½ï¿½ï¿½
             yield return null;
         }
         time = 0;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.0f);  //1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         while (alpha.a > 0.0f)  //Fade In
         {
             time += Time.deltaTime / F_time;
-            alpha.a = Mathf.Lerp(1, 0, time);   //ºÎµå·´°Ô ÀüÈ¯
-            FadePanel.color = alpha;    //¸Å ÇÁ·¹ÀÓ ÀÌ¹ÌÁö¿¡ alpha´ëÀÔ
+            alpha.a = Mathf.Lerp(1, 0, time);   //ï¿½Îµå·´ï¿½ï¿½ ï¿½ï¿½È¯
+            FadePanel.color = alpha;    //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ alphaï¿½ï¿½ï¿½ï¿½
             yield return null;
         }
-        FadePanel.gameObject.SetActive(false);
+        FadePanel.gameObject.SetActive(false);  //ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         yield return null;
     }
 

@@ -6,8 +6,6 @@ TagManager:
   tags:
   - TileMap
   - Monster
-  - Weapon
-  - Radar
   layers:
   - Default
   - TransparentFX
