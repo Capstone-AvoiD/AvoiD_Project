@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class MiniGamePencil : MonoBehaviour
 {
-    private MiniGameRadar playerRadar;
-
     private Vector2 pencilDir;
-    private float pencilSpeed = 20.0f;
+    private float pencilSpeed = 10.0f;
+
+    private GameObject monsterObj;
 
     private void Awake()
     {
-        
-        playerRadar = GameObject.FindWithTag("Radar").gameObject.GetComponent<MiniGameRadar>();
-        pencilDir = Random.insideUnitCircle;
+        monsterObj = GameObject.Find("Monster(Clone)");
+
+        if(monsterObj != null)
+        {
+            Debug.Log("Check");
+            pencilDir = (monsterObj.transform.position - transform.position).normalized;
+        }
+        else pencilDir = Random.insideUnitCircle;
         Destroy(gameObject, 5.0f);
     }
 
