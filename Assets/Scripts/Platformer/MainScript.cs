@@ -12,13 +12,15 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     private GameObject SkipDialog;
     private TextMeshProUGUI NPCText;
     private TextMeshProUGUI NPCName;
-    private int currentIndex;   //현재 대화문의 번호
-    string[] m_text;    //대사
 
-    private string[] playerName = new string[] { "도훈", "성태", "소현", " " };
+    string[] m_text;    //대사
+    private int currentIndex;   //현재 대화문의 번호
+
+    private string[] playerName =  
+        new string[] { "도훈", "성태", "소현", " " };
     private int setPlayerImage;  // 도훈: 0, 성태: 1, 소현: 2 나레이션: 3
     private int[] currentPlayer;    //현재 말하는 캐릭터
-    private GameObject NPC_Dohun;
+    private GameObject NPC_Dohun;//캐릭터 이미지
     private GameObject NPC_Seongtae;
     private GameObject NPC_Sohyun;
 
@@ -46,7 +48,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     public void NPCChatEnter(string text)   //Panel 활성
     {
         NPCText.text = text;
-        Dialog(0);
+        Dialog(0);  //처음 대사 출력
         NPCDialog.SetActive(true);
         StartCoroutine(TypingText());   //텍스트 타이핑 효과 코루틴 시작
     }
@@ -58,38 +60,39 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         NPCDialog.SetActive(false);
         NPCText.text = "";
         NPCName.text = "";
-        currentIndex = 0;
+        currentIndex = 0;   //대사 번호 초기화
     }
 
     IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
     {
         while (currentIndex < m_text.Length)    //모든 지정 텍스트 출력
         {
-            string sentence = Dialog(currentIndex);
-            NextDialog.SetActive(false);
+            //currentIndex = 현재 대사 번호, Dialog = 대사가 들어있는 함수
+            string sentence = Dialog(currentIndex); //순서에 맞는 대사 출력
+
+            NextDialog.SetActive(false);    //대사 출력 후 나타나도록
             SkipDialog.SetActive(false);
 
-            //yield return new WaitForSeconds(0.5f);  //타이핑 시작 대기
             for (int i = 0; i <= sentence.Length; i++)
             {
                 NPCText.text = sentence.Substring(0, i);
                 yield return new WaitForSeconds(0.01f); //타이핑 간격
-
             }
-            
+
             NextDialog.SetActive(true);
             SkipDialog.SetActive(true);
 
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.G));  //G키 누를 때까지 대기
-            
-            currentIndex++;
+            //G키 누를 때까지 대기
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.G));  
 
-            if (currentIndex >= m_text.Length)
+            currentIndex++; //다음 대사가 출력 되도록
+
+            if (currentIndex >= m_text.Length)  //정해진 대사 모두 출력시 종료
             {
                 break;
             }
         }
-        NPCChatExit();
+        NPCChatExit();  //Dialog 종료
     }
 
     public void DialogImage()   //캐릭터 이미지 초기설정
@@ -106,7 +109,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 
     }
 
-    public string Dialog(int Index)
+    public string Dialog(int Index) //대사 목록
     {
         currentIndex = Index;
         m_text = new string[]
@@ -132,14 +135,14 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
                 "저곳 , 우리 , 같이 좋은거?",    //{18, 3}
                 "좋은 냄새, 너만 ? 나도 나도!"    //{19, 3}
             };
-        currentPlayer = new int[]
+        currentPlayer = new int[]   //각 대사 순서에 맞는 플레이어 
         {
             3, 1, 0, 1, 0,
             3, 1, 1, 0, 3,
             3, 3, 3, 0, 3,
             2 ,0, 3, 3, 3
         };
-        setPlayerImage = currentPlayer[currentIndex];
+        setPlayerImage = currentPlayer[currentIndex];   
 
         switch (setPlayerImage)   //말하는 캐릭터의 이미지
         {
@@ -174,7 +177,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))    //P키 눌러 스킵
             NPCChatExit();
     }
 }
