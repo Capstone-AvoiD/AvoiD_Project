@@ -12,7 +12,24 @@ public class MiniGamePlayer : MonoBehaviour
     private float player_speed = 3.0f;                          // 플레이어 속성 생성
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
+    private BoxCollider2D playerCollider;
     private float attackTime = 1.5f;
+    private float penaltyAlpha = 0.0f;
+    private GameObject penaltyObj;
+
+    private int hp = 3;
+    private int Hp
+    {
+        get{ return hp; }
+        set
+        {
+            hp = value;
+            penaltyAlpha += 85.0f;
+
+            if(hp == 0) isFailure = true;
+            else StartCoroutine(ActivePenaltyObj());
+        }
+    }
 
     private Vector2 prePos;
 
@@ -26,6 +43,8 @@ public class MiniGamePlayer : MonoBehaviour
         player_rigid = gameObject.GetComponent<Rigidbody2D>();
         player_direction = transform.position;
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
+        playerCollider = gameObject.GetComponent<BoxCollider2D>();
+        penaltyObj = gameObject.transform.GetChild(0).gameObject;
 
         prePos = transform.localPosition;
 
@@ -80,11 +99,23 @@ public class MiniGamePlayer : MonoBehaviour
         prePos = transform.localPosition;
     }
 
+    private IEnumerator ActivePenaltyObj()
+    {
+        penaltyObj.GetComponent<SpriteRenderer>().color = new(1.0f, 1.0f, 1.0f, penaltyAlpha / 255.0f);
+
+        playerCollider.isTrigger = true;
+        penaltyObj.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        penaltyObj.SetActive(false);
+
+        playerCollider.isTrigger = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
         if(collision2D.gameObject.CompareTag("Monster"))
         {
-            isFailure = true;            
+            Hp -= 1;
         }
     }
 }
