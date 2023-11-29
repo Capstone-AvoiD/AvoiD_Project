@@ -26,7 +26,7 @@ public class NPCTrigger : MonoBehaviour
 
             if (Input.GetKey(KeyCode.G)) //G키 눌러 상호작용
             {
-                //if (typing == 0)
+                if (typing == 0)
                 {
                     Main.GetComponent<MainScript>().NPCChatEnter(ChatText);
                     typing = 1;

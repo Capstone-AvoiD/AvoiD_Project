@@ -32,51 +32,30 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     
     public void NPCChatExit()   //Panel 비활성
     {
-        //StopAllCoroutines();    //코루틴 종료
-        StopCoroutine(TypingText());
+        StopAllCoroutines();    //코루틴 종료
+        //StopCoroutine(TypingText());
         NPCText.text = "";
         NPCDialog.SetActive(false);
         currentIndex = 0;
     }
-    IEnumerator TypingText()
+
+    IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
     {
+        while (currentIndex < m_text.Length)    //모든 지정 텍스트 출력
+        {
             string sentence = m_text[currentIndex];
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);  //타이핑 시작 대기
             for (int i = 0; i <= sentence.Length; i++)
             {
                 NPCText.text = sentence.Substring(0, i);
-                yield return new WaitForSeconds(0.15f);
+                yield return new WaitForSeconds(0.15f); //타이핑 간격
             }
-
-            Debug.Log(currentIndex);
             currentIndex++;
-            // 마지막 문장이 아닌 경우에만 대기 시간 추가
-            if (currentIndex < m_text.Length)
-                yield return new WaitForSeconds(1.5f); // 수정된 부분
-        
+        }
+        currentIndex = 0;
     }
 
-    /*IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
-    {
-        if(currentIndex >= m_text.Length)
-        {
-            NPCDialog.SetActive(false);
-            currentIndex = 0;
-            yield break;
-        }
-
-        string sentence = m_text[currentIndex];
-
-        yield return new WaitForSeconds(0.5f);  //타이핑 시작 대기
-        for (int i = 0; i <= sentence.Length; i++)
-        {
-            NPCText.text = sentence.Substring(0, i);
-            yield return new WaitForSeconds(0.15f); //타이핑 간격
-        }
-        currentIndex++;
-    }*/
-    // Update is called once per frame
     void Update()
     {
 
