@@ -107,7 +107,6 @@ public class MiniGamePlayer : MonoBehaviour
         penaltyObj.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         penaltyObj.SetActive(false);
-
         playerCollider.isTrigger = false;
     }
 
