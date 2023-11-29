@@ -115,6 +115,7 @@ public class MiniGamePlayer : MonoBehaviour
     {
         if(collision2D.gameObject.CompareTag("Monster"))
         {
+            GameObject.Find("HP_" + Hp).gameObject.SetActive(false);
             Hp -= 1;
         }
     }
