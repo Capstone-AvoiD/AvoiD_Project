@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: MaruBuri-Bold SDF 1
+  m_Name: "\uBCF5\uC0AC\uBCF8 MaruBuri-Bold SDF 1"
   m_EditorClassIdentifier: 
   hashCode: 992437950
   material: {fileID: -7795992692530099870}
