@@ -8,8 +8,29 @@ public class MiniGamePlayer : MonoBehaviour
     private float player_speed = 3.0f;                          // 플레이어 속성 생성
     private Vector2 player_direction;
     private Rigidbody2D player_rigid;
+<<<<<<< HEAD
 
     Animator anim;//*****************************
+=======
+    private BoxCollider2D playerCollider;
+    private float attackTime = 1.5f;
+    private float penaltyAlpha = 0.0f;
+    private GameObject penaltyObj;
+
+    private int hp = 3;
+    private int Hp
+    {
+        get{ return hp; }
+        set
+        {
+            hp = value;
+            penaltyAlpha += 85.0f;
+
+            if(hp == 0) isFailure = true;
+            else StartCoroutine(ActivePenaltyObj());
+        }
+    }
+>>>>>>> feature/공격시스템_수정
 
     private Vector2 prePos;
 
@@ -27,8 +48,13 @@ public class MiniGamePlayer : MonoBehaviour
         player_rigid = gameObject.GetComponent<Rigidbody2D>(); 
         player_direction = transform.position;
         playerSprite = gameObject.GetComponent<SpriteRenderer>();
+<<<<<<< HEAD
         
         anim = GetComponent<Animator>();
+=======
+        playerCollider = gameObject.GetComponent<BoxCollider2D>();
+        penaltyObj = gameObject.transform.GetChild(0).gameObject;
+>>>>>>> feature/공격시스템_수정
 
         prePos = transform.localPosition;
     }
@@ -75,11 +101,27 @@ public class MiniGamePlayer : MonoBehaviour
         prePos = transform.localPosition;
     }
 
+    private IEnumerator ActivePenaltyObj()
+    {
+        penaltyObj.GetComponent<SpriteRenderer>().color = new(1.0f, 1.0f, 1.0f, penaltyAlpha / 255.0f);
+
+        playerCollider.isTrigger = true;
+        penaltyObj.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        penaltyObj.SetActive(false);
+        playerCollider.isTrigger = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision2D)
     {
         if(collision2D.gameObject.CompareTag("Monster"))
         {
+<<<<<<< HEAD
             isFailure = true;                   // GameManager에서 게임 상태 관리하도록 동작
+=======
+            GameObject.Find("HP_" + Hp).gameObject.SetActive(false);
+            Hp -= 1;
+>>>>>>> feature/공격시스템_수정
         }
     }
 
