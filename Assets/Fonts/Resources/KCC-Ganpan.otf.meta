@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a54eabcab5e5cb14681686ce3b6d5e0e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - KCC-Ganpan
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7345af5e9dd0bb04bb4ba5e2ff4904ef, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
