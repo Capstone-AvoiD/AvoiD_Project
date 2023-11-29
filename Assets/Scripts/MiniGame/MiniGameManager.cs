@@ -1,20 +1,22 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MiniGameManager : MonoBehaviour
 {
-    [SerializeField]
-    private MiniGamePlayer miniGamePlayer;
-    
-    [SerializeField]
-    private GameObject pauseMenu;
-    [SerializeField]
-    private GameObject retryMenu;
+    [SerializeField] private MiniGamePlayer miniGamePlayer;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject retryMenu;
+    [SerializeField] private TextMeshProUGUI timerText;
 
     private bool isState = false;
     private bool isPause = false;
+
+    private int time = 120;
+    private int minute = 0;
+    private int second = 0;
+    private string zeroSecond = "0";
 
     private bool isGameOver
     {
@@ -33,9 +35,9 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
-        
+        StartCoroutine(SetTimer());
     }
 
     void Update()
@@ -60,6 +62,7 @@ public class MiniGameManager : MonoBehaviour
 
     private void ShowGameOverMenu()
     {
+        StopCoroutine(SetTimer());
         retryMenu.SetActive(true);
         if(Input.GetKeyDown(KeyCode.R))
         {
@@ -75,6 +78,19 @@ public class MiniGameManager : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         isGameOver = true;
+    }
+
+    private IEnumerator SetTimer()
+    {
+        while(time >= 0)
+        {
+            minute = time / 60;
+            second = time % 60;
+            zeroSecond =  second < 10 ? "0" : "";
+            timerText.text = minute + "<color=black> : </color>" + zeroSecond + second;
+            yield return new WaitForSeconds(1.0f);
+            time--;
+        }
     }
 
     public void ClickReturnBtn()

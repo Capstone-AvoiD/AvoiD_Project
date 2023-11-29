@@ -15,7 +15,6 @@ public class MiniGamePencil : MonoBehaviour
 
         if(monsterObj != null)
         {
-            Debug.Log("Check");
             pencilDir = (monsterObj.transform.position - transform.position).normalized;
         }
         else pencilDir = Random.insideUnitCircle;
