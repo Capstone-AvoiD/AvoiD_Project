@@ -9,6 +9,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 {
     private GameObject NPCDialog;
     private GameObject NextDialog;
+    private GameObject SkipDialog;
     private TextMeshProUGUI NPCText;
     private TextMeshProUGUI NPCName;
     private int currentIndex;   //현재 대화문의 번호
@@ -24,17 +25,21 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     StringBuilder strb = new StringBuilder();
 
     // Start is called before the first frame update
-        
+
     void Start()
     {
         DialogImage();
 
         NPCDialog = GameObject.Find("NPCDialog");
         NextDialog = GameObject.Find("NextText");
+        SkipDialog = GameObject.Find("SkipText");
+
         NPCText = GameObject.Find("NPCText").GetComponent<TextMeshProUGUI>();
         NPCName = GameObject.Find("NPCName").GetComponent<TextMeshProUGUI>();
         NPCDialog.SetActive(false); //Panel 비활성
         NextDialog.SetActive(false); //Panel 비활성
+        SkipDialog.SetActive(false); //Panel 비활성
+
         currentIndex = 0;
     }
 
@@ -45,7 +50,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         NPCDialog.SetActive(true);
         StartCoroutine(TypingText());   //텍스트 타이핑 효과 코루틴 시작
     }
-    
+
     public void NPCChatExit()   //Panel 비활성
     {
         StopAllCoroutines();    //코루틴 종료
@@ -62,15 +67,21 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         {
             string sentence = Dialog(currentIndex);
             NextDialog.SetActive(false);
+            SkipDialog.SetActive(false);
 
             //yield return new WaitForSeconds(0.5f);  //타이핑 시작 대기
             for (int i = 0; i <= sentence.Length; i++)
             {
                 NPCText.text = sentence.Substring(0, i);
                 yield return new WaitForSeconds(0.01f); //타이핑 간격
+
             }
+            
             NextDialog.SetActive(true);
-            yield return new WaitUntil(() => Input.GetKey(KeyCode.G));
+            SkipDialog.SetActive(true);
+
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.G));  //G키 누를 때까지 대기
+            
             currentIndex++;
 
             if (currentIndex >= m_text.Length)
@@ -78,7 +89,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
                 break;
             }
         }
-        NPCChatExit();  
+        NPCChatExit();
     }
 
     public void DialogImage()   //캐릭터 이미지 초기설정
@@ -98,7 +109,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
     public string Dialog(int Index)
     {
         currentIndex = Index;
-        m_text = new string[] 
+        m_text = new string[]
             {   //도훈: 0, 성태: 1, 소현: 2, 나레이션: 3      {현재 번호, 말하는사람}
                 "최근 학교 내에서 마약을 복용하는 학생들이늘어나고있다. \n마약을 복용하는 학생들이 늘어나면서 점차 이상증세를 보이기 시작하는데….", //{0, 3}
                 "도훈아 도훈아 , 내가 진짜 좋은 거 가져왔어!", //{1, 1}
@@ -121,7 +132,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
                 "저곳 , 우리 , 같이 좋은거?",    //{18, 3}
                 "좋은 냄새, 너만 ? 나도 나도!"    //{19, 3}
             };
-        currentPlayer = new int[] 
+        currentPlayer = new int[]
         {
             3, 1, 0, 1, 0,
             3, 1, 1, 0, 3,
@@ -163,6 +174,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
 
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.P))
+            NPCChatExit();
     }
 }
