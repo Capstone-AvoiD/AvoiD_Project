@@ -8,14 +8,14 @@ public class NPCTrigger : MonoBehaviour
     public string ChatText = "";
     private GameObject Main;
     private GameObject TextTrigger;
-    int typing;
+    bool typing;
 
     void Start()
     {
         Main = GameObject.Find("Main");
         TextTrigger = GameObject.Find("TextTrigger");
         TextTrigger.SetActive(false);   //상호작용 텍스트 비확성
-        typing = 0;
+        typing = true;
     }
 
     private void OnTriggerStay2D(Collider2D collision)  //player와 npc가 충돌 중일 경우
@@ -23,13 +23,12 @@ public class NPCTrigger : MonoBehaviour
         if(collision.gameObject.name == "player")
         {
             TextTrigger.SetActive(true);            
-
             if (Input.GetKey(KeyCode.G)) //G키 눌러 상호작용
             {
-                if (typing == 0)
+                if (typing == true) //typing 상태 추가
                 {
                     Main.GetComponent<MainScript>().NPCChatEnter(ChatText);
-                    typing = 1;
+                    typing = false;
                 }
             }
         }
@@ -41,7 +40,7 @@ public class NPCTrigger : MonoBehaviour
         {
             Main.GetComponent<MainScript>().NPCChatExit();
             TextTrigger.SetActive(false);
-            typing = 0;
+            typing = true;
         }
     }
     // Update is called once per frame
