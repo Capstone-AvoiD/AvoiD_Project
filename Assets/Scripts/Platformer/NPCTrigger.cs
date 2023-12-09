@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCTrigger : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class NPCTrigger : MonoBehaviour
     private GameObject Main;
     private GameObject TextTrigger;
     bool typing;
+    string currentSceneName;
 
     void Start()
     {
+        currentSceneName = SceneManager.GetActiveScene().name;
         Main = GameObject.Find("Main");
         TextTrigger = GameObject.Find("TextTrigger");
         TextTrigger.SetActive(false);   //상호작용 텍스트 비확성
@@ -27,8 +30,21 @@ public class NPCTrigger : MonoBehaviour
             {
                 if (typing == true) //typing 상태 추가
                 {
-                    Main.GetComponent<MainScript>().NPCChatEnter(ChatText);
-                    typing = false;
+                    if(currentSceneName == "Platformer_School")
+                    {
+                        Main.GetComponent<MainScript>().NPCChatEnter(ChatText);
+                        typing = false;
+                    }
+                    else if (currentSceneName == "Platformer_PlayGround")
+                    {
+                        Main.GetComponent<PlaygroundMainScript>().NPCChatEnter(ChatText);
+                        typing = false;
+                    }
+                    else if (currentSceneName == "Platformer_Park")
+                    {
+                        Main.GetComponent<ParkMainScript>().NPCChatEnter(ChatText);
+                        typing = false;
+                    }
                 }
             }
         }
