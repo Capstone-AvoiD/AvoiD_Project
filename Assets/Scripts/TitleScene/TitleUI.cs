@@ -91,6 +91,6 @@ public class TitleUI : MonoBehaviour
 
     public void PlatformerScene()                      // 게임 선택 시 플랫포머 씬 전환
     {
-        SceneManager.LoadScene("Platformer_Scene");
+        SceneManager.LoadScene("Platformer_School");
     }
 }

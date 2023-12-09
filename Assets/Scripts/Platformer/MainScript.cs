@@ -104,7 +104,7 @@ public class MainScript : MonoBehaviour //Panel 활성, 비활성
         NPC_Sohyun = GameObject.Find("NPCImage_Sohyun");
 
         NPC_Dohun.SetActive(false);
-        NPC_Seongtae.SetActive(false);
+        NPC_Seongtae.SetActive(false);  
         NPC_Sohyun.SetActive(false);
 
     }
