@@ -14,6 +14,9 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
     private TextMeshProUGUI NPCText;
     private TextMeshProUGUI NPCName;
 
+    public Button button1; // 첫 번째 버튼을 Inspector 창에서 할당
+    public Button button2; // 두 번째 버튼을 Inspector 창에서 할당
+
     private int selectNum = 0;
     string[] m_text;    //대사
     string[] hospitalText;
@@ -50,15 +53,32 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
         SkipDialog.SetActive(false); //Panel 비활성
         SelectionDialog.SetActive(false);
 
+        /*button1.onClick.AddListener(() => OnButtonClick(button1));
+        button2.onClick.AddListener(() => OnButtonClick(button2));*/
+
         currentIndex = 0;
 
-        //Invoke("PlayerSelect", 2.0f);
-        Invoke("NPCChatEnter", 2.0f);
+        Invoke("PlayerSelect", 2.0f);
+        //Invoke("NPCChatEnter", 2.0f);
     }
 
     public void PlayerSelect()
     {
         SelectionDialog.SetActive(true);
+    }
+
+    public void OnHospitalButtonClick()
+    {
+        selectNum = 1;
+        SelectionDialog.SetActive(false);
+        NPCChatEnter();
+    }
+
+    public void OnSchoolButtonClick()
+    {
+        selectNum = 2;
+        SelectionDialog.SetActive(false);
+        NPCChatEnter();
     }
 
     public void NPCChatEnter()   //Panel 활성
@@ -127,7 +147,7 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
     public string Dialog(int Index) //대사 목록
     {
         currentIndex = Index;
-        hospitalText = new string[]
+        hospitalText = new string[10]
             {   //도훈: 0, 성태: 1, 소현: 2, 나레이션: 3      {현재 번호, 말하는사람}
                 "무사히 빠져나와 병원에 도착했다.",
                 "무사히 현재 증상을 의사 선생님에게 이야기하며 응급실에서 마약 해독 치료를 받게 되었다.",
@@ -140,13 +160,13 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
                 "그렇게 백일몽 같던 학교의 마약사건이 사라져갔다.",
                 "게임클리어."
             };
-        hospitalPlayer = new int[]   //각 대사 순서에 맞는 플레이어 
+        hospitalPlayer = new int[10]   //각 대사 순서에 맞는 플레이어 
         {
             0, 0, 0, 0, 0,
             0, 0, 0, 0, 0
         };
 
-        schoolText = new string[]
+        schoolText = new string[10]
             {   //도훈: 0, 성태: 1, 소현: 2, 나레이션: 3      {말하는사람}
                 "학교 교실로 다시 돌아가는 도훈.",   //3
                 "교실안에는 성태가 반긴다.",   //3
@@ -159,12 +179,22 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
                 "계속해서 성태가 건네준 음료수와 마약이 생각난다…",  //0
                 "게임 오버."    //0
             };
-        schoolPlayer = new int[]   //각 대사 순서에 맞는 플레이어 
+        schoolPlayer = new int[10]   //각 대사 순서에 맞는 플레이어 
         {
             3, 3, 0, 1, 3,
             1, 0, 0, 0, 0
         };
-
+        if (selectNum == 1)
+        {
+            m_text = hospitalText;
+            currentPlayer = hospitalPlayer;
+        }
+        else if (selectNum == 2)
+        {
+            m_text = schoolText;
+            currentPlayer = schoolPlayer;
+        }
+        setPlayerImage = currentPlayer[currentIndex];
         switch (setPlayerImage)   //말하는 캐릭터의 이미지
         {
             case 0:
@@ -192,19 +222,6 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
                 NPC_Sohyun.SetActive(false);
                 break;
         }
-
-        if(selectNum == 1)
-        {
-            m_text = hospitalText;
-            currentPlayer = hospitalPlayer;
-        }
-        else if(selectNum == 2)
-        {
-            m_text = schoolText;
-            currentPlayer = schoolPlayer;
-        }
-
-        setPlayerImage = currentPlayer[currentIndex];
         return m_text[currentIndex];
     }
 
