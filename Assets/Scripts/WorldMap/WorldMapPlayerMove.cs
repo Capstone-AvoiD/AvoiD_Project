@@ -22,13 +22,10 @@ public class WorldMapPlayerMove : MonoBehaviour
         StartCoroutine(BezierMove(bezierGToP));
     }
 
-    void Update()
-    {
-        
-    }
-
     private IEnumerator BezierMove(Transform[] transformList)
     {
+        yield return new WaitForSeconds(1.0f);
+        
         for(int i = 0; i < transformList.Length / 4; i++)
         {
             for(float t = 0.0f; t < 1.0f; t+= Time.deltaTime * moveSpeed * (i + 1))
@@ -63,18 +60,20 @@ public class WorldMapPlayerMove : MonoBehaviour
 
     private void OnDrawGizmos() 
     {
+        Transform[] gizmosList = bezierGToP;
+
         for(int i = 0; i < bezierGToP.Length / 4; i++)
         {
             for(float t = 0.0f; t < 1.0f; t += 0.05f)
             {
-                gizmosPos = Mathf.Pow(1 - t, 3) * bezierGToP[i * 4 + 0].position
-                            + 3 * t * Mathf.Pow(1 - t, 2) * bezierGToP[i * 4 + 1].position
-                            + 3 * t * (1 - t) * bezierGToP[i * 4 + 2].position
-                            + Mathf.Pow(t, 3) * bezierGToP[i * 4 + 3].position;
+                gizmosPos = Mathf.Pow(1 - t, 3) * gizmosList[i * 4 + 0].position
+                            + 3 * t * Mathf.Pow(1 - t, 2) * gizmosList[i * 4 + 1].position
+                            + 3 * t * (1 - t) * gizmosList[i * 4 + 2].position
+                            + Mathf.Pow(t, 3) * gizmosList[i * 4 + 3].position;
 
                 Gizmos.DrawSphere(gizmosPos, 0.1f);
-                Gizmos.DrawLine(bezierGToP[i * 4 + 0].position, bezierGToP[i * 4 + 1].position);
-                Gizmos.DrawLine(bezierGToP[i * 4 + 2].position, bezierGToP[i * 4 + 3].position);
+                Gizmos.DrawLine(gizmosList[i * 4 + 0].position, gizmosList[i * 4 + 1].position);
+                Gizmos.DrawLine(gizmosList[i * 4 + 2].position, gizmosList[i * 4 + 3].position);
             }
         }
     }
