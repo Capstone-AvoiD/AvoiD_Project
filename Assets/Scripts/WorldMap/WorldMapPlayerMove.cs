@@ -10,7 +10,7 @@ public class WorldMapPlayerMove : MonoBehaviour
     [Header("WayPoint")]
     [SerializeField] private Transform[] bezierGToP;
 
-    private float moveSpeed = 0.2f;
+    private float moveSpeed = 0.3f;
     private float rotSpeed = 10.0f;
     private Vector3 bezierPos;
     private Vector3 prePos;
@@ -29,21 +29,24 @@ public class WorldMapPlayerMove : MonoBehaviour
 
     private IEnumerator BezierMove(Transform[] transformList)
     {
-        for(float t = 0.0f; t < 1.0f; t+= Time.deltaTime * moveSpeed)
+        for(int i = 0; i < transformList.Length / 4; i++)
         {
-            bezierPos = Mathf.Pow(1 - t, 3) * transformList[0].position
-                        + 3 * t * Mathf.Pow(1 - t, 2) * transformList[1].position
-                        + 3 * t * (1 - t) * transformList[2].position
-                        + Mathf.Pow(t, 3) * transformList[3].position;
+            for(float t = 0.0f; t < 1.0f; t+= Time.deltaTime * moveSpeed * (i + 1))
+            {
+                bezierPos = Mathf.Pow(1 - t, 3) * transformList[i * 4 + 0].position
+                            + 3 * t * Mathf.Pow(1 - t, 2) * transformList[i * 4 + 1].position
+                            + 3 * t * (1 - t) * transformList[i * 4 + 2].position
+                            + Mathf.Pow(t, 3) * transformList[i * 4 + 3].position;
 
-            player.transform.position = bezierPos;
+                player.transform.position = bezierPos;
 
-            float angle = prePos.z - transform.position.z;
-            prePos = player.transform.position;
+                float angle = prePos.z - transform.position.z;
+                prePos = player.transform.position;
 
-            transform.rotation = Quaternion.Euler(0.0f ,0.0f, 180.0f - angle);
+                transform.rotation = Quaternion.Euler(0.0f ,0.0f, 180.0f - angle);
 
-            yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         bool isRot = true;
@@ -60,16 +63,19 @@ public class WorldMapPlayerMove : MonoBehaviour
 
     private void OnDrawGizmos() 
     {
-        for(float t = 0.0f; t < 1.0f; t += 0.05f)
+        for(int i = 0; i < bezierGToP.Length / 4; i++)
         {
-            gizmosPos = Mathf.Pow(1 - t, 3) * bezierGToP[0].position
-                        + 3 * t * Mathf.Pow(1 - t, 2) * bezierGToP[1].position
-                        + 3 * t * (1 - t) * bezierGToP[2].position
-                        + Mathf.Pow(t, 3) * bezierGToP[3].position;
+            for(float t = 0.0f; t < 1.0f; t += 0.05f)
+            {
+                gizmosPos = Mathf.Pow(1 - t, 3) * bezierGToP[i * 4 + 0].position
+                            + 3 * t * Mathf.Pow(1 - t, 2) * bezierGToP[i * 4 + 1].position
+                            + 3 * t * (1 - t) * bezierGToP[i * 4 + 2].position
+                            + Mathf.Pow(t, 3) * bezierGToP[i * 4 + 3].position;
 
-            Gizmos.DrawSphere(gizmosPos, 0.1f);
-            Gizmos.DrawLine(bezierGToP[0].position, bezierGToP[1].position);
-            Gizmos.DrawLine(bezierGToP[2].position, bezierGToP[3].position);
+                Gizmos.DrawSphere(gizmosPos, 0.1f);
+                Gizmos.DrawLine(bezierGToP[i * 4 + 0].position, bezierGToP[i * 4 + 1].position);
+                Gizmos.DrawLine(bezierGToP[i * 4 + 2].position, bezierGToP[i * 4 + 3].position);
+            }
         }
     }
 }
