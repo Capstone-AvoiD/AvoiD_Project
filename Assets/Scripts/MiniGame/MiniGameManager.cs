@@ -12,6 +12,8 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private GameObject clearMenu;
     [SerializeField] private TextMeshProUGUI timerText;
 
+    private MiniGameFade fade;
+
     private bool isState = false;
     private bool isPause = false;
 
@@ -55,8 +57,11 @@ public class MiniGameManager : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(SetTimer());
         if(gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        fade = gameObject.GetComponent<MiniGameFade>();
+
+        StartCoroutine(fade.FadeOut());
+        StartCoroutine(SetTimer());
     }
 
     void Update()
@@ -113,7 +118,10 @@ public class MiniGameManager : MonoBehaviour
 
         if(time < 0 && !isClear)
         {
-            Time.timeScale = 0.0f;
+            BoxCollider2D player = GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>();
+
+            player.isTrigger = true;
+
             IsClear = true;
         }
     }
@@ -125,7 +133,7 @@ public class MiniGameManager : MonoBehaviour
 
     public void ClickNextBtn()
     {
-        SceneManager.LoadScene("WorldMapScene");
+        StartCoroutine(fade.FadeIn("WorldMapScene"));
     }
 
     public void ClickSettingBtn()
@@ -135,6 +143,6 @@ public class MiniGameManager : MonoBehaviour
 
     public void ClickTitleBtn()
     {
-        SceneManager.LoadScene("TitleScene");
+        StartCoroutine(fade.FadeIn("TitleScene"));
     }
 }

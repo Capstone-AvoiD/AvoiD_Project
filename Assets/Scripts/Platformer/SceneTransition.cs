@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
+    [SerializeField] private string sceneName;
     private GameObject Panel;
     
     // Start is called before the first frame update
@@ -14,15 +15,15 @@ public class SceneTransition : MonoBehaviour
         Panel = GameObject.Find("GoalPanel");
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)  //player¿Í GoalÀÌ Á¢ÃËÇÏ´Â °æ¿ì
+    private void OnTriggerEnter2D(Collider2D collision)  //playerï¿½ï¿½ Goalï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
     {
         if (collision.gameObject.name == "player")
         {
-            Invoke("Fading", 2.0f);  //2ÃÊ ´ë±â ÈÄ ¹Ì´Ï°ÔÀÓ¾ÀÀ¸·Î ÀüÈ¯
+            Invoke("Fading", 2.0f);  //2ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì´Ï°ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         }
     }
     
-    private void OnTriggerExit2D(Collider2D collision)  //player¿Í Ãæµ¹ÀÌ ³¡³¯ °æ¿ì
+    private void OnTriggerExit2D(Collider2D collision)  //playerï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     {
         if (collision.gameObject.name == "player")
         {
@@ -36,9 +37,9 @@ public class SceneTransition : MonoBehaviour
         Invoke("LoadMiniGameScene", 1.0f);
     }
 
-    private void LoadMiniGameScene()    //¹Ì´Ï°ÔÀÓ¾ÀÀ¸·Î ÀüÈ¯
+    private void LoadMiniGameScene()    //ï¿½Ì´Ï°ï¿½ï¿½Ó¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
     {
-        SceneManager.LoadScene("MiniGameScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 
     public void ReturnTitle()
