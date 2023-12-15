@@ -14,7 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MiniGameScene.unity
     guid: 1311079f965567c4e8d7d22cb19bc816
-  - enabled: 0
-    path: Assets/Scenes/Platformer_Scene.unity
-    guid: f9921553a87a38f479d62f26ab04b973
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_School.unity
+    guid: 534a302c30606454fa33b1a4d6aa4a6c
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_PlayGround.unity
+    guid: 158446da789ef9f4a965e5ee0f919a90
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_Park.unity
+    guid: 6c7d0bb856816b54ea45567afb34a997
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_LastScene.unity
+    guid: 9cc814ce4d6c30145aa4126ff3dbe661
   m_configObjects: {}

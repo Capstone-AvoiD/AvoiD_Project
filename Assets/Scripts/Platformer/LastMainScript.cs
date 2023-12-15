@@ -33,7 +33,24 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
     private GameObject NPC_Seongtae;
     private GameObject NPC_Sohyun;
 
-    StringBuilder strb = new StringBuilder();
+    //StringBuilder strb = new StringBuilder();
+    
+    //Fade
+    public Image FadePanel;
+    float time = 0.0f;
+    float F_time = 1.0f;
+    float f = 1.0f;
+    float F
+    {
+        get { return f; }
+        set
+        {
+            f = value;
+
+        }
+    }
+
+
 
     // Start is called before the first frame update
 
@@ -58,8 +75,40 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
 
         currentIndex = 0;
 
-        Invoke("PlayerSelect", 2.0f);
+        Fade();
+        Invoke("PlayerSelect", 3.0f);
         //Invoke("NPCChatEnter", 2.0f);
+    }
+
+    public void Fade()
+    {
+        StartCoroutine(FadeFlow());
+    }
+    IEnumerator FadeFlow()
+    {
+        FadePanel.gameObject.SetActive(true);
+        time = 0;
+        Color alpha = FadePanel.color;  //Color alpha
+
+        while (alpha.a < 1.0f)   //Fade Out
+        {
+            time += Time.deltaTime / F_time;
+            alpha.a = Mathf.Lerp(0, 1, time);
+            FadePanel.color = alpha;
+            yield return null;
+        }
+        time = 0;
+        yield return new WaitForSeconds(1.0f);
+
+        while (alpha.a > 0.0f)  //Fade In
+        {
+            time += Time.deltaTime / F_time;
+            alpha.a = Mathf.Lerp(1, 0, time);
+            FadePanel.color = alpha;
+            yield return null;
+        }
+        FadePanel.gameObject.SetActive(false);
+        yield return null;
     }
 
     public void PlayerSelect()
