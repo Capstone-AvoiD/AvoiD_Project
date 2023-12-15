@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MiniGameManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private MiniGamePlayer miniGamePlayer;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject retryMenu;
+    [SerializeField] private GameObject clearMenu;
     [SerializeField] private TextMeshProUGUI timerText;
 
     private bool isState = false;
     private bool isPause = false;
 
-    private int time = 120;
+    private int time = 5;
     private int minute = 0;
     private int second = 0;
     private string zeroSecond = "0";
@@ -35,9 +37,26 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    private bool isClear = false;
+    private bool IsClear
+    {
+        get { return isClear; }
+        set
+        {
+            isClear = value;
+
+            if(isClear)
+            {
+                gameManager.ChangeGameState();
+                clearMenu.SetActive(true);
+            }
+        }
+    }
+
     private void Awake()
     {
         StartCoroutine(SetTimer());
+        if(gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -91,11 +110,22 @@ public class MiniGameManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             time--;
         }
+
+        if(time < 0 && !isClear)
+        {
+            Time.timeScale = 0.0f;
+            IsClear = true;
+        }
     }
 
     public void ClickReturnBtn()
     {
         ShowPauseMenu();
+    }
+
+    public void ClickNextBtn()
+    {
+        SceneManager.LoadScene("WorldMapScene");
     }
 
     public void ClickSettingBtn()

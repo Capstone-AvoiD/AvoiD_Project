@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
+    [HideInInspector] public enum GameClearState { None, School, Ground, Park};
+    [HideInInspector] public static GameClearState gameState = GameClearState.None;
+
     // 외부에서 GameManager 클래스를 instance로 참조 가능 - Singleton Pattern
     public static GameManager instance
     {
@@ -38,5 +41,15 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("TitleScene");
             }
         }
+    }
+
+    public void ChangeGameState()
+    {
+        gameState++;
+    }
+
+    public GameClearState CheckState()
+    {
+        return gameState;
     }
 }
