@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
     private GameObject Panel;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,15 @@ public class SceneTransition : MonoBehaviour
         SceneManager.LoadScene("MiniGameScene", LoadSceneMode.Single);
     }
 
+    public void ReturnTitle()
+    {
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     // Update is called once per frame
     void Update()
     {

@@ -16,6 +16,8 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
 
     public Button button1; // 첫 번째 버튼을 Inspector 창에서 할당
     public Button button2; // 두 번째 버튼을 Inspector 창에서 할당
+    public Button returnButton;
+    public Button QuitButton;
 
     private int selectNum = 0;
     string[] m_text;    //대사
@@ -70,6 +72,10 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
         SkipDialog.SetActive(false); //Panel 비활성
         SelectionDialog.SetActive(false);
 
+        returnButton = GameObject.Find("ReturnButton").GetComponent<Button>();  //타이틀 복귀 버튼
+        returnButton.gameObject.SetActive(false);
+        QuitButton = GameObject.Find("QuitButton").GetComponent<Button>();  //타이틀 복귀 버튼
+        QuitButton.gameObject.SetActive(false);
         /*button1.onClick.AddListener(() => OnButtonClick(button1));
         button2.onClick.AddListener(() => OnButtonClick(button2));*/
 
@@ -107,7 +113,7 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
             FadePanel.color = alpha;
             yield return null;
         }
-        FadePanel.gameObject.SetActive(false);
+        //FadePanel.gameObject.SetActive(false);
         yield return null;
     }
 
@@ -142,10 +148,14 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
     {
         StopAllCoroutines();    //코루틴 종료
         //StopCoroutine(TypingText());
-        NPCDialog.SetActive(false);
+        //NPCDialog.SetActive(false);
         NPCText.text = "";
         NPCName.text = "";
         currentIndex = 0;   //대사 번호 초기화
+        NPCName.gameObject.SetActive(false);
+        SkipDialog.gameObject.SetActive(false);
+        NextDialog.gameObject.SetActive(false);
+        
     }
 
     IEnumerator TypingText()    //텍스트 타이핑 효과 코루틴
@@ -174,6 +184,11 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
 
             if (currentIndex >= m_text.Length)  //정해진 대사 모두 출력시 종료
             {
+                if (selectNum == 1)
+                    QuitButton.gameObject.SetActive(true);
+                else if (selectNum == 2)
+                    returnButton.gameObject.SetActive(true);
+
                 break;
             }
         }
