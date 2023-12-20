@@ -14,7 +14,6 @@ public class TitleUI : MonoBehaviour
 
     private bool isExit = false;
     private bool isCredit = false;
-    private bool isGame = false;
     private MenuState menu_state;
 
     private void Awake()
@@ -27,7 +26,6 @@ public class TitleUI : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))                                // esc키를 이용해서 UI 화면 비활성화
         {
             if(menu_state == MenuState.credit) OpenCreditMenu();
-            else if(menu_state == MenuState.gameplay) OpenGamePlayMenu();
             else OpenExitMenu();
 
         }
@@ -67,21 +65,9 @@ public class TitleUI : MonoBehaviour
         }
     }
 
-    public void OpenGamePlayMenu()                      // 게임 선택 UI 활성 및 비활성화
+    public void StartGamePlay()                      // 게임 선택 UI 활성 및 비활성화
     {
-        // title_ui[2] = GamePlayLayer
-        if(isGame)
-        {
-            title_ui[2].SetActive(false);
-            isGame = false;
-            menu_state = MenuState.idle;
-        }
-        else
-        {
-            title_ui[2].SetActive(true);
-            isGame = true;
-            menu_state = MenuState.gameplay;
-        }
+        SceneManager.LoadScene("WorldMapScene");
     }
 
     public void MiniGameScene()                        // 게임 선택 시 미니 게임 씬 전환

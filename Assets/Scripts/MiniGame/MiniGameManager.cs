@@ -17,7 +17,7 @@ public class MiniGameManager : MonoBehaviour
     private bool isState = false;
     private bool isPause = false;
 
-    private int time = 5;
+    private int time = 20;
     private int minute = 0;
     private int second = 0;
     private string zeroSecond = "0";
@@ -59,7 +59,10 @@ public class MiniGameManager : MonoBehaviour
     {
         if(gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         fade = gameObject.GetComponent<MiniGameFade>();
+    }
 
+    private void Start()
+    {
         StartCoroutine(fade.FadeOut());
         StartCoroutine(SetTimer());
     }
@@ -133,7 +136,14 @@ public class MiniGameManager : MonoBehaviour
 
     public void ClickNextBtn()
     {
-        StartCoroutine(fade.FadeIn("WorldMapScene"));
+        if(gameManager.CheckState() == GameManager.GameClearState.Park)
+        {
+            StartCoroutine(fade.FadeIn("Platformer_LastScene"));
+        }
+        else
+        {
+            StartCoroutine(fade.FadeIn("WorldMapScene"));
+        }
     }
 
     public void ClickSettingBtn()

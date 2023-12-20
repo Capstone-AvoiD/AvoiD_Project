@@ -49,7 +49,7 @@ public class SceneTransition : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Single);
     }
     // Update is called once per frame
     void Update()

@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WorldMapPlayerMove : MonoBehaviour
 {
@@ -8,10 +8,13 @@ public class WorldMapPlayerMove : MonoBehaviour
     [SerializeField] private GameObject player;
 
     [Header("WayPoint")]
-    [SerializeField] private Transform[] bezierGToP;
+    [SerializeField] public Transform[] bezierSToS;
+    [SerializeField] public Transform[] bezierSToG;
+    [SerializeField] public Transform[] bezierGToP;
 
     private float moveSpeed = 0.3f;
     private float rotSpeed = 10.0f;
+    private Vector3 linearPos;
     private Vector3 bezierPos;
     private Vector3 prePos;
     private Vector3 gizmosPos;
@@ -19,11 +22,33 @@ public class WorldMapPlayerMove : MonoBehaviour
     private void Awake()
     {
         prePos = player.transform.position;
-        StartCoroutine(BezierMove(bezierGToP));
     }
 
-    private IEnumerator BezierMove(Transform[] transformList)
+    public IEnumerator StandMove(Transform[] transformList)
     {
+        player.transform.position = transformList[0].position;
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("Platformer_School");
+    }
+
+    public IEnumerator LinearMove(Transform[] transformList)
+    {
+        player.transform.position = transformList[0].position;
+        for(float t = 0.0f; t < 1.0f; t += Time.deltaTime * moveSpeed)
+        {
+            linearPos = transformList[0].position * (1 - t) + transformList[1].position * t;
+            player.transform.position = linearPos;
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("Platformer_PlayGround");
+    }
+
+    public IEnumerator BezierMove(Transform[] transformList)
+    {
+        player.transform.position = transformList[0].position;
+
         yield return new WaitForSeconds(1.0f);
         
         for(int i = 0; i < transformList.Length / 4; i++)
@@ -56,6 +81,10 @@ public class WorldMapPlayerMove : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene("Platformer_Park");
     }
 
     private void OnDrawGizmos() 
