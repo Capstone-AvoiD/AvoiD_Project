@@ -17,18 +17,18 @@ public class NPCTrigger : MonoBehaviour
         currentSceneName = SceneManager.GetActiveScene().name;
         Main = GameObject.Find("Main");
         TextTrigger = GameObject.Find("TextTrigger");
-        TextTrigger.SetActive(false);   //»óÈ£ÀÛ¿ë ÅØ½ºÆ® ºñÈ®¼º
+        TextTrigger.SetActive(false);   //ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½Ø½ï¿½Æ® ï¿½ï¿½È®ï¿½ï¿½
         typing = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)  //player¿Í npc°¡ Ãæµ¹ ÁßÀÏ °æ¿ì
+    private void OnTriggerStay2D(Collider2D collision)  //playerï¿½ï¿½ npcï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     {
         if(collision.gameObject.name == "player")
         {
             TextTrigger.SetActive(true);            
-            if (Input.GetKey(KeyCode.G)) //GÅ° ´­·¯ »óÈ£ÀÛ¿ë
+            if (Input.GetKey(KeyCode.G)) //GÅ° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½
             {
-                if (typing == true) //typing »óÅÂ Ãß°¡
+                if (typing == true) //typing ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
                 {
                     if(currentSceneName == "Platformer_School")
                     {
@@ -50,11 +50,23 @@ public class NPCTrigger : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)  //player¿Í npc Ãæµ¹ÀÌ ³¡³¯ °æ¿ì
+    private void OnTriggerExit2D(Collider2D collision)  //playerï¿½ï¿½ npc ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     {
         if(collision.gameObject.name == "player")
         {
-            Main.GetComponent<MainScript>().NPCChatExit();
+            switch(SceneManager.GetActiveScene().name)
+            {
+                case "Platformer_PlayGround":
+                    Main.GetComponent<PlaygroundMainScript>().NPCChatExit();
+                    break;
+                case "Platformer_Park":
+                    Main.GetComponent<ParkMainScript>().NPCChatExit();
+                    break;
+                default:
+                    Main.GetComponent<MainScript>().NPCChatExit();
+                    break;
+            }
+
             TextTrigger.SetActive(false);
             typing = true;
         }

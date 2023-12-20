@@ -92,7 +92,6 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
     }
     IEnumerator FadeFlow()
     {
-        FadePanel.gameObject.SetActive(true);
         time = 0;
         Color alpha = FadePanel.color;  //Color alpha
 
@@ -113,7 +112,8 @@ public class LastMainScript : MonoBehaviour //Panel 활성, 비활성
             FadePanel.color = alpha;
             yield return null;
         }
-        //FadePanel.gameObject.SetActive(false);
+        
+        FadePanel.gameObject.SetActive(false);
         yield return null;
     }
 

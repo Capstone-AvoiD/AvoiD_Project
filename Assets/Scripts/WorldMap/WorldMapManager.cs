@@ -1,42 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldMapManager : MonoBehaviour
 {
-    [HideInInspector]
-    public enum StageState {School, Ground, Park};
-    [HideInInspector]
-    public static StageState stageState = StageState.School;
+    private GameManager gameManager;
+    [SerializeField] private WorldMapPlayerMove playerMove;
+
     void Start()
     {
-        
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        if(gameManager != null) CheckStage();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckStage();
-    }
-
+    
     private void CheckStage()
     {
-        switch(stageState)
+        switch(gameManager.CheckState())
         {
-            case StageState.School:
-                ReadyGame();
+            case GameManager.GameClearState.None:
+                StartCoroutine(playerMove.StandMove(playerMove.bezierSToS));
                 break;
-            case StageState.Ground:
-                ReadyGame();
+            case GameManager.GameClearState.School:
+                StartCoroutine(playerMove.LinearMove(playerMove.bezierSToG));
                 break;
-            case StageState.Park:
-                ReadyGame();
+            case GameManager.GameClearState.Ground:
+                StartCoroutine(playerMove.BezierMove(playerMove.bezierGToP));
+                break;
+            case GameManager.GameClearState.Park:
                 break;
         }
-    }
-
-    private void ReadyGame()
-    {
-
     }
 }

@@ -5,15 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MiniGameManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private MiniGamePlayer miniGamePlayer;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject retryMenu;
+    [SerializeField] private GameObject clearMenu;
     [SerializeField] private TextMeshProUGUI timerText;
+
+    private MiniGameFade fade;
 
     private bool isState = false;
     private bool isPause = false;
 
-    private int time = 120;
+    private int time = 20;
     private int minute = 0;
     private int second = 0;
     private string zeroSecond = "0";
@@ -35,8 +39,31 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    private bool isClear = false;
+    private bool IsClear
+    {
+        get { return isClear; }
+        set
+        {
+            isClear = value;
+
+            if(isClear)
+            {
+                gameManager.ChangeGameState();
+                clearMenu.SetActive(true);
+            }
+        }
+    }
+
     private void Awake()
     {
+        if(gameManager == null) gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        fade = gameObject.GetComponent<MiniGameFade>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(fade.FadeOut());
         StartCoroutine(SetTimer());
     }
 
@@ -91,11 +118,32 @@ public class MiniGameManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             time--;
         }
+
+        if(time < 0 && !isClear)
+        {
+            BoxCollider2D player = GameObject.FindWithTag("Player").GetComponent<BoxCollider2D>();
+
+            player.isTrigger = true;
+
+            IsClear = true;
+        }
     }
 
     public void ClickReturnBtn()
     {
         ShowPauseMenu();
+    }
+
+    public void ClickNextBtn()
+    {
+        if(gameManager.CheckState() == GameManager.GameClearState.Park)
+        {
+            StartCoroutine(fade.FadeIn("Platformer_LastScene"));
+        }
+        else
+        {
+            StartCoroutine(fade.FadeIn("WorldMapScene"));
+        }
     }
 
     public void ClickSettingBtn()
@@ -105,6 +153,6 @@ public class MiniGameManager : MonoBehaviour
 
     public void ClickTitleBtn()
     {
-        SceneManager.LoadScene("TitleScene");
+        StartCoroutine(fade.FadeIn("TitleScene"));
     }
 }

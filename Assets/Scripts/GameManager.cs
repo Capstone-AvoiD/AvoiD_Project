@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
+    [HideInInspector] public enum GameClearState { None, School, Ground, Park};
+    [HideInInspector] public static GameClearState gameState = GameClearState.None;
+
     // 외부에서 GameManager 클래스를 instance로 참조 가능 - Singleton Pattern
     public static GameManager instance
     {
@@ -29,14 +32,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
-    private void Update()
+    public void ChangeGameState()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))                                    // 임시용 씬 전환 기능 - esc키를 통해 씬 전환
-        {
-            if(SceneManager.GetActiveScene().name == "Platformer_Scene")
-            {
-                SceneManager.LoadScene("TitleScene");
-            }
-        }
+        gameState++;
+    }
+
+    public GameClearState CheckState()
+    {
+        return gameState;
     }
 }
