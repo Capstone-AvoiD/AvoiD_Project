@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TileMap
+  - Monster
+  - Weapon
+  - GameManager
   layers:
   - Default
   - TransparentFX

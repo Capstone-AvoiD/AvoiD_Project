@@ -6,6 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/TitleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/WorldMapScene.unity
+    guid: c1af6318cefe6704397a769c99f3bc18
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_School.unity
+    guid: 534a302c30606454fa33b1a4d6aa4a6c
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/MiniGameScene.unity
+    guid: 1311079f965567c4e8d7d22cb19bc816
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_PlayGround.unity
+    guid: 158446da789ef9f4a965e5ee0f919a90
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/GroundMiniGameScene.unity
+    guid: 95f75b813b328dd48b40c938a7d0dc0f
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_Park.unity
+    guid: 6c7d0bb856816b54ea45567afb34a997
+  - enabled: 1
+    path: Assets/Scenes/MiniGame/ParkMiniGameScene.unity
+    guid: 84f75d5894190094ea8156267c8bd36b
+  - enabled: 1
+    path: Assets/Scenes/Platformer/Platformer_LastScene.unity
+    guid: 9cc814ce4d6c30145aa4126ff3dbe661
   m_configObjects: {}
