@@ -1,4 +1,5 @@
-# SW융합캡스톤디자인2 AvoiD_Project 소스코드입니다.
+# SW융합캡스톤디자인2 AvoiD_Project팀
+
 
 ![image](https://github.com/Capstone-AvoiD/AvoiD_Project/assets/129487583/a8b84664-c1dd-4eb8-8cf9-272440a813fb)
 ![image](https://github.com/Capstone-AvoiD/AvoiD_Project/assets/129487583/63952f6f-f026-4b3c-917b-cbff0fd2a440)
